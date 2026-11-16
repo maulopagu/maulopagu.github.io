@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mauricio López — QA & DA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <style>
+    :root {
+      --bg: #F3F5F8;
+      --surf: #fff;
+      --text: #142033;
+      --mute: #586579;
+      --line: #D5DBE4;
+      --accent: #3E6FE0;
+      --on: #fff;
+      --data: #F2B01E;
+      --qa: #1FBF8F;
+      --disp: 'Bricolage Grotesque', Georgia, serif;
+      --body: 'Figtree', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      color-scheme: light
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0E1622;
+        --surf: #16212F;
+        --text: #E8EDF3;
+        --mute: #98A5B8;
+        --line: #26354A;
+        --on: #0E1622;
+        color-scheme: dark
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #0E1622;
+      --surf: #16212F;
+      --text: #E8EDF3;
+      --mute: #98A5B8;
+      --line: #26354A;
+      --on: #0E1622;
+      color-scheme: dark
+    }
+
+    body[data-lens=data] {
+      --accent: var(--data);
+      --on: #142033
+    }
+
+    body[data-lens=qa] {
+      --accent: var(--qa);
+      --on: #0E1622
+    }
+
+    html {
+      scroll-padding-top: 70px;
+      height: 100%
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: inherit
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 400 17px/1.6 var(--body);
+      transition: background .3s
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 22px
+    }
+
+    section {
+      padding: 84px 0
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--disp);
+      line-height: 1.08;
+      margin: 0
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6.5vw, 4.6rem);
+      font-weight: 800;
+      letter-spacing: -.02em
+    }
+
+    h2 {
+      font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 10px
+    }
+
+    p {
+      margin: 0 0 14px;
+      max-width: 62ch
+    }
+
+    .mute {
+      color: var(--mute)
+    }
+
+    button,
+    a.btn {
+      font: 600 .95rem var(--body);
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: var(--surf);
+      color: var(--text);
+      padding: 10px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block
+    }
+
+    button:hover,
+    a.btn:hover {
+      border-color: var(--accent)
+    }
+
+    .pri {
+      background: var(--accent);
+      color: var(--on);
+      border-color: var(--accent)
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      padding-top: env(safe-area-inset-top, 0px)
+    }
+
+    nav .wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      height: 56px
+    }
+
+    nav b {
+      font-family: var(--disp);
+      font-size: 1.05rem;
+      margin-right: auto
+    }
+
+    .lens {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px;
+      background: var(--surf)
+    }
+
+    .lens button {
+      border: 0;
+      border-radius: 999px;
+      padding: 6px 14px;
+      background: none;
+      font-size: .85rem
+    }
+
+    .lens button[aria-pressed=true] {
+      background: var(--accent);
+      color: var(--on)
+    }
+
+    .links {
+      display: flex;
+      gap: 16px;
+      font-size: .9rem
+    }
+
+    .links button {
+      border: 0;
+      background: none;
+      padding: 4px;
+      color: var(--mute)
+    }
+
+    @media(max-width:760px) {
+      .links {
+        display: none
+      }
+    }
+
+    .hero {
+      padding: 70px 0 40px
+    }
+
+    .portrait-section {
+      padding: 48px 0
+    }
+
+    .portrait-frame {
+      width: min(450px, 70vw);
+      aspect-ratio: 1;
+      margin: 0 auto;
+      padding: 14px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 8px 28px rgba(20, 32, 51, .14)
+    }
+
+    .portrait-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 28%
+    }
+
+    .hero .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 40px;
+      align-items: center
+    }
+
+    @media(max-width:860px) {
+      .hero .grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(transparent 62%, color-mix(in srgb, var(--accent) 55%, transparent) 62%)
+    }
+
+    .cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px
+    }
+
+    .recon {
+      background: var(--surf);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      font-family: var(--mono);
+      font-size: .82rem
+    }
+
+    .recon table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    .recon th {
+      text-align: left;
+      color: var(--mute);
+      font-weight: 500;
+      padding: 6px 4px
+    }
+
+    .recon td {
+      padding: 8px 4px;
+      border-top: 1px solid var(--line)
+    }
+
+    .recon td:nth-child(2),
+    .recon td:nth-child(3) {
+      text-align: right
+    }
+
+    .st {
+      display: inline-block;
+      min-width: 78px;
+      text-align: center;
+      border-radius: 5px;
+      padding: 1px 6px
+    }
+
+    .st.ok {
+      background: color-mix(in srgb, var(--qa) 25%, transparent)
+    }
+
+    .st.bad {
+      background: color-mix(in srgb, #E5484D 28%, transparent)
+    }
+
+    .st.wait {
+      color: var(--mute)
+    }
+
+    .recon .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      font-family: var(--body);
+      color: var(--mute);
+      font-size: .85rem
+    }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 48px
+    }
+
+    .kpis div {
+      background: var(--surf);
+      padding: 16px
+    }
+
+    .kpis b {
+      font: 700 1.9rem var(--disp);
+      display: block
+    }
+
+    .kpis span {
+      font-size: .85rem;
+      color: var(--mute)
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      background: var(--surf);
+      border-radius: 999px;
+      padding: 4px 13px;
+      font-size: .88rem
+    }
+
+    .chip.on {
+      border-color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 22%, var(--surf))
+    }
+
+    .pipe {
+      display: flex;
+      gap: 0;
+      margin-top: 28px;
+      overflow-x: auto;
+      padding-bottom: 10px
+    }
+
+    .node {
+      flex: 1 0 210px;
+      position: relative;
+      text-align: left;
+      padding: 16px;
+      border-radius: 10px;
+      margin-right: 34px;
+      min-height: 132px
+    }
+
+    .node:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: -34px;
+      top: 50%;
+      width: 34px;
+      height: 2px;
+      background: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 12px);
+      background-size: 12px 2px;
+      animation: flow 1s linear infinite
+    }
+
+    @keyframes flow {
+      to {
+        background-position: 12px 0
+      }
+    }
+
+    .node small {
+      color: var(--mute);
+      display: block;
+      font-family: var(--mono);
+      font-size: .76rem
+    }
+
+    .node b {
+      font-family: var(--disp);
+      font-size: 1.15rem;
+      display: block;
+      margin: 4px 0
+    }
+
+    .node.hl {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent)
+    }
+
+    .drawer,
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      background: rgba(5, 10, 18, .55);
+      display: none
+    }
+
+    .drawer.open,
+    .modal.open {
+      display: flex
+    }
+
+    .drawer {
+      justify-content: flex-end
+    }
+
+    .panel {
+      background: var(--bg);
+      width: min(480px, 100%);
+      height: 100%;
+      overflow: auto;
+      padding: 26px;
+      border-left: 1px solid var(--line)
+    }
+
+    .panel li {
+      margin-bottom: 12px
+    }
+
+    .panel ul {
+      padding-left: 18px
+    }
+
+    .tg {
+      font: 500 .7rem var(--mono);
+      border-radius: 4px;
+      padding: 1px 6px;
+      margin-right: 6px;
+      background: var(--line)
+    }
+
+    .tg.data {
+      background: var(--data);
+      color: #142033
+    }
+
+    .tg.qa {
+      background: var(--qa);
+      color: #0E1622
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 16px;
+      margin-top: 24px
+    }
+
+    .card {
+      background: var(--surf);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 18px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    .card h3 {
+      font-size: 1.2rem
+    }
+
+    .card p {
+      font-size: .95rem;
+      margin: 0
+    }
+
+    .card dt {
+      font-weight: 600;
+      font-size: .82rem;
+      color: var(--mute)
+    }
+
+    .card dd {
+      margin: 0 0 6px;
+      font-size: .93rem
+    }
+
+    .mbox {
+      margin: auto;
+      width: min(1000px, 96vw);
+      height: min(640px, 88vh);
+      background: var(--surf);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden
+    }
+
+    .mbox header {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .mbox header b {
+      margin-right: auto;
+      font-family: var(--disp)
+    }
+
+    .mbox .body {
+      flex: 1;
+      position: relative
+    }
+
+    .mbox iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0
+    }
+
+    .skel {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(100deg, var(--line) 30%, var(--surf) 50%, var(--line) 70%);
+      background-size: 300% 100%;
+      animation: sk 1.4s infinite
+    }
+
+    @keyframes sk {
+      to {
+        background-position: -300% 0
+      }
+    }
+
+    .fb {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 30px
+    }
+
+    .toolgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 18px
+    }
+
+    .toolgrid h3 {
+      font-size: 1rem;
+      margin-bottom: 6px
+    }
+
+    form {
+      display: grid;
+      gap: 10px;
+      max-width: 480px;
+      margin-top: 18px
+    }
+
+    input,
+    textarea {
+      font: inherit;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--surf);
+      color: var(--text)
+    }
+
+    footer {
+      padding: 30px 0 50px;
+      color: var(--mute);
+      font-size: .88rem;
+      border-top: 1px solid var(--line)
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      * {
+        animation: none !important;
+        transition: none !important
+      }
+    }
+  </style>
+</head>
+
+<body data-lens="all">
+  <nav>
+  <div class="wrap">
+    <div style="width:40px;height:40px;padding:2px;flex:none;border-radius:50%;background:#fff">
+      <img src="cv/Profile.jpg" alt="" style="display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 28%">
+    </div>
+    <b>Mauricio López</b>
+      <div class="links"><button data-go="path">Career</button><button data-go="dash">Dashboards</button><button
+          data-go="code">Python</button><button data-go="hi">Contact</button>
+      </div>
+      <div class="lens" role="group" aria-label="Choose your lens"><button data-lens="all"
+          aria-pressed="true">All</button><button data-lens="data" aria-pressed="false">Data</button><button
+          data-lens="qa" aria-pressed="false">QA</button></div>
+      <button id="theme" aria-label="Toggle light or dark theme">◐</button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <p class="mute" id="kicker"></p>
+          <h1>I connect the dots, challenge inconsistencies, and <em>turn quality insights into action.</em></h1>
+          <p style="margin-top:18px" id="lead"></p>
+        </div>
+        <div class="recon" aria-live="polite">
+          <table>
+            <thead>
+              <tr>
+                <th>order</th>
+                <th>source</th>
+                <th>report</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+          <div class="foot"><span id="msg">Sample data. Run the checks the way I do.</span><button class="pri"
+              id="run">Run checks</button></div>
+        </div>
+      </div>
+      <div class="cta" style="justify-content:center">
+        <button class="pri" data-go="path">Start the tour</button>
+        <a class="btn" href="https://linkedin.com/in/maulop" target="_blank" rel="noopener">My LinkedIn</a>
+        <a class="btn" href="cv/CV_MauricioLopez_2027.pdf" target="_blank" rel="noopener">My CV</a>
+        <a class="btn" href="https://github.com/maulopagu?tab=repositories" target="_blank" rel="noopener">My GitHub</a>
+      </div>
+      <div class="kpis">
+        <div><b data-n="6">0</b><span>years in data analytics</span></div>
+        <div><b data-n="4">0</b><span>years in QA automation</span></div>
+        <div><b data-n="250">0</b><span>hours/week of manual work removed</span></div>
+        <div><b data-n="500">0</b><span>users’ access managed</span></div>
+      </div>
+    </div>
+  </header>
+
+
+  <section id="about">
+    <div class="wrap" style="text-align:center">
+      <div class="portrait-frame">
+        <img src="cv/Profile.jpg" alt="Mauricio López">
+      </div>
+      <br><h2>About</h2>
+      <p style="margin-left:auto;margin-right:auto">I started in workforce management analytics, forecasting demand for customer service accounts and reporting on
+        KPIs. Over time my work moved toward one question: can this data be trusted? Today I automate reporting
+        pipelines and test them, so teams get accurate numbers without manual work.</p>
+      <p style="margin-left:auto;margin-right:auto">I lead through onboarding, mentoring, technical planning and cross-functional delivery. English proficient,
+        Spanish native. Based in Pereira, Colombia.</p>
+      <div class="chips" id="stack" style="justify-content:center"></div>
+    </div>
+  </section>
+
+  <section id="path">
+    <div class="wrap">
+      <h2>Career as a data pipeline</h2>
+      <p class="mute">From raw reporting to automated quality. Select a stage to see what I did there. Achievements
+        follow the lens you chose.</p>
+      <div class="pipe" id="pipe"></div>
+      <div style="margin-top:32px">
+        <h3 style="margin:0 0 16px;font-size:1.35rem">Education</h3>
+        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:1.05rem">
+          <li style="padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surf)">B.Sc. Communications and ICT <span class="mute">(UTP, 2022)</span></li>
+          <li style="padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surf)">Full Stack Development with PHP and JS <span class="mute">(Instituto Comfamiliar, 2023)</span></li>
+          <li style="padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surf)">Virtual Teaching <span class="mute">(UTP, 2021)</span></li>
+          <li style="padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surf)">Analytics and Data Visualization in Agribusiness <span class="mute">(UTP, 2026)</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="dash">
+    <div class="wrap">
+      <h2>Power BI dashboards</h2>
+      <p class="mute">Select a dashboard to open it live. Placeholders below: add your “Publish to web” links in the
+        <code>DASHBOARDS</code> array.</p>
+      <div class="cards" id="dcards"></div>
+    </div>
+  </section>
+
+  <section id="code">
+    <div class="wrap">
+      <h2>Python and data projects</h2>
+      <p class="mute">Open source work on GitHub. Edit the <code>PROJECTS</code> array to list your repos.</p>
+      <div class="chips" id="pf"></div>
+      <div class="cards" id="pcards"></div>
+      <p style="margin-top:20px"><a class="btn" href="https://github.com/" target="_blank" rel="noopener">See all
+          repositories on GitHub</a></p>
+    </div>
+  </section>
+
+  <section id="hi">
+    <div class="wrap" style="text-align:center">
+      <h2>Let’s talk</h2>
+      <p style="margin-left:auto;margin-right:auto">Hiring for data or QA automation, or have a reporting problem to fix? Send me a note.</p>
+      <form id="f" style="margin:18px auto 0"><input name="n" placeholder="Your name" required aria-label="Your name"><input name="e" type="email"
+          placeholder="Your email" required aria-label="Your email"><textarea name="m" rows="4"
+          placeholder="How can I help?" required aria-label="Message"></textarea><button class="pri">Send email</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="display:flex;justify-content:center;align-items:center;gap:14px 32px;flex-wrap:wrap;text-align:center">
+      <span>© <span id="yr"></span> Mauricio López</span>
+      <div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap">
+        <a href="https://linkedin.com/in/maulop" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">My LinkedIn</a>
+        <a href="cv/CV_MauricioLopez_2027.pdf" style="color:inherit;text-decoration:none">My CV</a>
+        <a href="mailto:maulopagu@gmail.com" style="color:inherit;text-decoration:none">My email: maulopagu@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="drawer" id="drawer" role="dialog" aria-modal="true">
+    <div class="panel" id="panel"></div>
+  </div>
+  <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <div class="mbox">
+      <header><b id="mt"></b><button id="fs">Fullscreen</button><a class="btn" id="mo" target="_blank"
+          rel="noopener">Open in Power BI</a><button id="mx" aria-label="Close">✕</button></header>
+      <div class="body" id="mb"></div>
+    </div>
+  </div>
+
+  <script>
+    /* ===== EDIT YOUR CONTENT HERE ===== */
+    const DASHBOARDS = [
+      { title: "Sales performance overview", problem: "Leadership waited days for a manual weekly report.", solution: "Interactive model with DAX measures and Power Query refresh.", tools: ["Power BI", "DAX", "Power Query"], result: "One source of truth, refreshed automatically.", embedUrl: "", publicLink: "" },
+      { title: "Contact center forecast vs actual", problem: "Forecast error was hard to trace to root causes.", solution: "Variance views by interval, queue and day.", tools: ["Power BI", "Power Pivot", "Excel"], result: "Faster variance reviews and clearer staffing decisions.", embedUrl: "", publicLink: "" },
+      { title: "Report delivery tracker", problem: "Teams could not see which client reports had shipped.", solution: "Status board fed from an email server via Power Query.", tools: ["Power Query", "Power BI"], result: "Shared visibility across teams.", embedUrl: "", publicLink: "" }];
+    const PROJECTS = [
+      { name: "report-automation", desc: "Python pipeline that extracts, validates and delivers scheduled reports.", stack: ["Python", "Pandas"], cat: ["ETL", "Automation"], url: "https://github.com/", finding: "Replaces a manual weekly process." },
+      { name: "data-quality-checks", desc: "Reusable checks for outliers and formatting errors with Pandas and NumPy.", stack: ["Pandas", "NumPy"], cat: ["QA", "Pandas"], url: "https://github.com/", finding: "Flags anomalies before stakeholders see them." },
+      { name: "playwright-smoke-tests", desc: "Exploratory smoke tests for critical production flows.", stack: ["Python", "Playwright"], cat: ["QA", "Automation"], url: "https://github.com/", finding: "Catches broken dashboards early." }];
+    const JOBS = [
+      {
+        id: "acc", co: "Accedo Technologies", role: "WFM, Real Time Analyst", when: "Aug 2020 – Apr 2022", tools: ["Power Query", "Power Pivot", "Excel"], b: [
+          ["data", "Built hourly, daily and monthly performance reports (CSAT, leads, conversions, logged hours) with built-in validation checks."],
+          ["data", "Monitored real-time queue trends to detect anomalies early and escalate with data."],
+          ["data", "Tracked data-driven action plans that helped 6 accounts meet their targets."],
+          ["qa", "Managed access provisioning for 500+ users, verifying permissions for security and compliance."]]
+      },
+      {
+        id: "tp", co: "Teleperformance", role: "WFM Analyst", when: "Apr 2022 – May 2023", tools: ["Excel", "Power Query"], b: [
+          ["data", "Built forecasts and capacity plans for Walmart and eBay accounts: headcount, contact volume, revenue."],
+          ["both", "Stress-tested assumptions, measured accuracy against actuals and refined models to reduce error."],
+          ["data", "Produced weekly and monthly capacity plans with documented assumptions and risk scenarios."],
+          ["data", "Monitored plan performance from long-term to intraday and flagged service level risks."]]
+      },
+      {
+        id: "cx", co: "Concentrix", role: "Global Analytics Insights, Sr Analyst", when: "May 2023 – Nov 2023", tools: ["Python", "Excel", "Macros"], b: [
+          ["data", "Led improvement projects from detection to resolution."],
+          ["both", "Applied statistics and validation to find anomalies and root causes of performance gaps."],
+          ["qa", "Validated data across reporting pipelines before it reached stakeholders."],
+          ["qa", "Ran acceptance testing on new dashboards against business requirements."],
+          ["both", "Automated recurring data checks and reports with Python and macros, saving 10 hrs/week."]]
+      },
+      {
+        id: "vz", co: "Velozient (Cart.com)", role: "Data QA Automation Engineer", when: "Nov 2023 – Present", tools: ["Python", "Playwright", "Pandas", "NumPy", "Power Automate", "Power Query", "SQL", "Claude Code", "Power BI"], b: [
+          ["both", "Built automated Python reporting pipelines for Marketplace Services and Growth Marketing, replacing manual design, ETL, validation and delivery."],
+          ["qa", "Automated Playwright smoke tests on production; validated formatting and outliers with Pandas and NumPy."],
+          ["both", "Designed a Power Automate workflow with Teams and SharePoint to log and auto-assign support requests by role."],
+          ["data", "Built a report delivery tracker in Power Query connected to Exchange."],
+          ["both", "Root-caused data discrepancies across pipelines with engineers, improving accuracy and reliability."],
+          ["qa", "Owned data validation across the client lifecycle: onboarding, reporting, offboarding."]]
+      }];
+    const SKILLS = { "Data": ["Power BI", "Power Query", "Power Pivot", "SQL", "Excel", "Macros"], "Automation and QA": ["Python", "Playwright", "Pandas", "NumPy", "Power Automate"], "AI-assisted work": ["Claude Code"] };
+    const COPY = {
+      all: ["QA Automation and Data Analytics", "Two sides of one job: insight you can use, and data you can trust."],
+      data: ["Data Analytics · 6+ years", "I turn operational data into reports and dashboards leaders can act on, with QA automation behind them."],
+      qa: ["QA Automation · 4+ years", "I test platforms, pipelines and reports with Playwright, Pandas and NumPy, with a data analyst’s eye."]
+    };
+    /* ===== APP ===== */
+    const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    let lens = "all", filt = "All", openJob = null;
+    const sv = (k, v) => { try { localStorage.setItem(k, v) } catch (e) { } }, ld = k => { try { return localStorage.getItem(k) } catch (e) { return null } };
+    function setLens(l, save = true) {
+      lens = l; document.body.dataset.lens = l;
+      $$('.lens button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lens === l));
+      $('#kicker').textContent = COPY[l][0]; $('#lead').textContent = COPY[l][1];
+      if (save) { sv('lens', l); try { history.replaceState(null, '', '#' + l) } catch (e) { } }
+      renderPipe(); if (openJob) showJob(openJob)
+    }
+    $$('.lens button').forEach(b => b.onclick = () => setLens(b.dataset.lens));
+    $$('[data-go]').forEach(b => b.onclick = () => document.getElementById(b.dataset.go).scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth' }));
+    $('#theme').onclick = () => { const d = document.documentElement, dark = getComputedStyle(d).colorScheme === 'dark'; d.dataset.theme = dark ? 'light' : 'dark' };
+    $('#yr').textContent = new Date().getFullYear();
+
+    /* hero reconciliation demo */
+    const DATA = [["A-1041", "1,320.00", "1,320.00"], ["A-1042", "845.50", "845.50"], ["A-1043", "1,240.50", "1,204.50"], ["A-1044", "310.00", "310.00"]];
+    let fixed = false;
+    function drawRows(st) {
+      $('#rows').innerHTML = DATA.map((r, i) => {
+        const rep = fixed && i === 2 ? r[1] : r[2]; const s = st[i] || 'wait';
+        const lab = s === 'ok' ? '✓ match' : s === 'bad' ? '✗ mismatch' : '…'; return `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${rep}</td><td><span class="st ${s}">${lab}</span></td></tr>`
+      }).join('')
+    }
+    drawRows([]);
+    let done = false;
+    $('#run').onclick = async function () {
+      const b = this;
+      if (done) { done = false; fixed = false; b.textContent = 'Run checks'; $('#msg').textContent = 'Sample data. Run the checks the way I do.'; drawRows([]); return }
+      b.disabled = true; const st = [];
+      for (let i = 0; i < DATA.length; i++) { await new Promise(r => setTimeout(r, 380)); st[i] = (DATA[i][1] === (fixed && i === 2 ? DATA[i][1] : DATA[i][2])) ? 'ok' : 'bad'; drawRows(st) }
+      b.disabled = false;
+      if (st.includes('bad')) { $('#msg').textContent = 'Caught: A-1043 has swapped digits (1,240.50 vs 1,204.50).'; b.textContent = 'Fix source and re-run'; fixed = true }
+      else { $('#msg').textContent = 'All rows reconcile. Report is safe to deliver.'; b.textContent = 'Reset demo'; done = true }
+    };
+    /* counters */
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return; io.unobserve(e.target); const t = +e.target.dataset.n, sfx = t >= 100 ? '+' : t === 10 ? '' : '+'; let n = 0;
+      const id = setInterval(() => { n = Math.min(t, n + Math.ceil(t / 30)); e.target.textContent = n + (n === t ? sfx : ''); if (n === t) clearInterval(id) }, 35)
+    }), { threshold: .6 });
+    $$('[data-n]').forEach(e => io.observe(e));
+    /* about chips */
+    $('#stack').innerHTML = ["Python", "Playwright", "Pandas", "NumPy", "SQL", "Power BI", "Power Query", "Power Automate", "Excel Macros", "Claude Code: MCPs, Skills, Agents", "Leadership", "Growth mindset"].map(s => `<span class="chip">${s}</span>`).join('');
+    /* pipeline */
+    const show = t => lens === 'all' || t === lens || t === 'both';
+    function renderPipe() {
+      $('#pipe').innerHTML = JOBS.map((j, i) => `<button class="node" data-id="${j.id}"><small>${j.when}</small><b>${j.co}</b><span class="mute">${j.role}</span></button>`).join('');
+      $$('.node').forEach(n => n.onclick = () => showJob(n.dataset.id))
+    }
+    function showJob(id) {
+      openJob = id; const j = JOBS.find(x => x.id === id);
+      $('#panel').innerHTML = `<button id="dx" style="float:right">Close</button><h2 style="font-size:1.6rem">${j.co}</h2><p class="mute">${j.role} · ${j.when}</p><ul>${j.b.filter(x => show(x[0])).map(x => `<li><span class="tg ${x[0]}">${x[0]}</span>${esc(x[1])}</li>`).join('')}</ul><div class="chips">${j.tools.map(t => `<span class="chip">${t}</span>`).join('')}</div>`;
+      $('#drawer').classList.add('open'); $('#dx').focus(); $('#dx').onclick = closeDrawer
+    }
+    function closeDrawer() { $('#drawer').classList.remove('open'); openJob = null }
+    $('#drawer').onclick = e => { if (e.target.id === 'drawer') closeDrawer() };
+    /* dashboards */
+    $('#dcards').innerHTML = DASHBOARDS.map((d, i) => `<button class="card" data-i="${i}"><h3>${d.title}</h3><dl><dt>Problem</dt><dd>${d.problem}</dd><dt>Solution</dt><dd>${d.solution}</dd><dt>Impact</dt><dd>${d.result}</dd></dl><div class="chips" style="margin:0">${d.tools.map(t => `<span class="chip">${t}</span>`).join('')}</div></button>`).join('');
+    $$('#dcards .card').forEach(c => c.onclick = () => openDash(DASHBOARDS[c.dataset.i]));
+    function openDash(d) {
+      $('#mt').textContent = d.title; const mo = $('#mo'); mo.style.display = d.publicLink ? '' : 'none'; mo.href = d.publicLink || '#';
+      const mb = $('#mb');
+      if (d.embedUrl) {
+        mb.innerHTML = '<div class="skel"></div>'; const f = document.createElement('iframe'); f.title = d.title; f.allowFullscreen = true; f.src = d.embedUrl; f.onload = () => { mb.querySelector('.skel')?.remove() };
+        mb.appendChild(f); setTimeout(() => { const s = mb.querySelector('.skel'); if (s) s.outerHTML = '<div class="fb"><p>The dashboard is taking too long to load. Try “Open in Power BI”.</p></div>' }, 12000)
+      }
+      else mb.innerHTML = '<div class="fb"><p>No dashboard link yet. Add an <code>embedUrl</code> from Power BI “Publish to web” in the <code>DASHBOARDS</code> array.</p></div>';
+      $('#modal').classList.add('open'); $('#mx').focus()
+    }
+    const closeM = () => { $('#modal').classList.remove('open'); $('#mb').innerHTML = '' };
+    $('#mx').onclick = closeM; $('#modal').onclick = e => { if (e.target.id === 'modal') closeM() };
+    $('#fs').onclick = () => { const f = $('#mb iframe'); (f || $('#mb')).requestFullscreen?.() };
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeM(); closeDrawer() } });
+    /* projects */
+    const cats = ["All", ...new Set(PROJECTS.flatMap(p => p.cat))];
+    function renderP() {
+      $('#pf').innerHTML = cats.map(c => `<button class="chip ${c === filt ? 'on' : ''}" data-c="${c}">${c}</button>`).join('');
+      $$('#pf button').forEach(b => b.onclick = () => { filt = b.dataset.c; renderP() });
+      $('#pcards').innerHTML = PROJECTS.filter(p => filt === 'All' || p.cat.includes(filt)).map(p => `<a class="card" href="${p.url}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><h3>${p.name}</h3><p>${p.desc}</p><p class="mute" style="font-size:.88rem">Finding: ${p.finding}</p><div class="chips" style="margin:0">${p.stack.map(t => `<span class="chip">${t}</span>`).join('')}</div></a>`).join('')
+    }
+    renderP();
+    /* toolkit */
+    const tg = $('#tg');
+    if (tg) {
+      tg.innerHTML = Object.entries(SKILLS).map(([g, a]) => `<div><h3>${g}</h3><div class="chips" style="margin:0">${a.map(s => `<button class="chip" data-s="${s}">${s}</button>`).join('')}</div></div>`).join('');
+      $$('#tg .chip').forEach(c => {
+        const on = () => { const s = c.dataset.s; $$('.node').forEach(n => n.classList.toggle('hl', JOBS.find(j => j.id === n.dataset.id).tools.includes(s))) }, off = () => $$('.node').forEach(n => n.classList.remove('hl'));
+        c.onmouseenter = on; c.onfocus = on; c.onmouseleave = off; c.onblur = off
+      });
+    }
+    /* contact */
+    $('#f').onsubmit = e => { e.preventDefault(); const d = new FormData(e.target); location.href = `mailto:maulopagu@gmail.com?subject=${encodeURIComponent('Portfolio message from ' + d.get('n'))}&body=${encodeURIComponent(d.get('m') + '\n\n' + d.get('e'))}` };
+    /* init */
+    const h = location.hash.slice(1); setLens(['all', 'data', 'qa'].includes(h) ? h : (ld('lens') || 'all'), false);
+  </script>
+</body>
+
+</html>
