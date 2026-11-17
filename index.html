@@ -715,8 +715,8 @@
   <section id="dash">
     <div class="wrap">
       <h2>Power BI dashboards</h2>
-      <p class="mute">Select a dashboard to open it live. Placeholders below: add your “Publish to web” links in the
-        <code>DASHBOARDS</code> array.</p>
+      <p class="mute">Select a dashboard to open it live. </p>
+        <!-- Placeholders below: add your “Publish to web” links in the<code>DASHBOARDS</code> array. -->
       <div class="cards" id="dcards"></div>
     </div>
   </section>
@@ -724,7 +724,8 @@
   <section id="code">
     <div class="wrap">
       <h2>Python and data projects</h2>
-      <p class="mute">Open source work on GitHub. Edit the <code>PROJECTS</code> array to list your repos.</p>
+      <p class="mute">Open source work on GitHub.</p>
+      <!-- Edit the PROJECTS array to list your repos. -->
       <div class="chips" id="pf"></div>
       <div class="cards" id="pcards"></div>
       <p style="margin-top:20px"><a class="btn" href="https://github.com/" target="_blank" rel="noopener">See all
@@ -776,7 +777,7 @@
   <script>
     /* ===== EDIT YOUR CONTENT HERE ===== */
     const DASHBOARDS = [
-      { title: "Sales performance overview", problem: "Leadership waited days for a manual weekly report.", solution: "Interactive model with DAX measures and Power Query refresh.", tools: ["Power BI", "DAX", "Power Query"], result: "One source of truth, refreshed automatically.", embedUrl: "", publicLink: "" },
+      { title: "Sales performance overview", problem: "Leadership waited days for a manual weekly report.", solution: "Interactive model with DAX measures and Power Query refresh.", tools: ["Power BI", "DAX", "Power Query"], result: "One source of truth, refreshed automatically.", embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiNzRjNmIyZmUtZGI2NC00YTYwLWI5OTEtZWZhNzJjYTE4NTgxIiwidCI6IjM2ZTRjMjk2LWJmNjgtNGQxNS05YjQ5LWY1ZTgyNGFlOWRiNiIsImMiOjZ9", publicLink: "https://app.powerbi.com/view?r=eyJrIjoiNzRjNmIyZmUtZGI2NC00YTYwLWI5OTEtZWZhNzJjYTE4NTgxIiwidCI6IjM2ZTRjMjk2LWJmNjgtNGQxNS05YjQ5LWY1ZTgyNGFlOWRiNiIsImMiOjZ9" },
       { title: "Contact center forecast vs actual", problem: "Forecast error was hard to trace to root causes.", solution: "Variance views by interval, queue and day.", tools: ["Power BI", "Power Pivot", "Excel"], result: "Faster variance reviews and clearer staffing decisions.", embedUrl: "", publicLink: "" },
       { title: "Report delivery tracker", problem: "Teams could not see which client reports had shipped.", solution: "Status board fed from an email server via Power Query.", tools: ["Power Query", "Power BI"], result: "Shared visibility across teams.", embedUrl: "", publicLink: "" }];
     const PROJECTS = [
