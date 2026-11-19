@@ -632,9 +632,9 @@
       <div class="links"><button data-go="path">Career</button><button data-go="dash">Dashboards</button><button
           data-go="code">Python</button><button data-go="hi">Contact</button>
       </div>
-      <div class="lens" role="group" aria-label="Choose your lens"><button data-lens="all"
+      <!-- <div class="lens" role="group" aria-label="Choose your lens"><button data-lens="all"
           aria-pressed="true">All</button><button data-lens="data" aria-pressed="false">Data</button><button
-          data-lens="qa" aria-pressed="false">QA</button></div>
+          data-lens="qa" aria-pressed="false">QA</button></div> -->
       <button id="theme" aria-label="Toggle light or dark theme">◐</button>
     </div>
   </nav>
@@ -667,13 +667,13 @@
         <button class="pri" data-go="path">Start the tour</button>
         <a class="btn" href="https://linkedin.com/in/maulop" target="_blank" rel="noopener">My LinkedIn</a>
         <a class="btn" href="cv/CV_MauricioLopez_2027.pdf" target="_blank" rel="noopener">My CV</a>
-        <a class="btn" href="https://github.com/maulopagu?tab=repositories" target="_blank" rel="noopener">My GitHub</a>
+        <!-- <a class="btn" href="https://github.com/maulopagu?tab=repositories" target="_blank" rel="noopener">My GitHub</a> -->
       </div>
       <div class="kpis">
         <div><b data-n="6">0</b><span>years in data analytics</span></div>
         <div><b data-n="4">0</b><span>years in QA automation</span></div>
         <div><b data-n="250">0</b><span>hours/week of manual work removed</span></div>
-        <div><b data-n="500">0</b><span>users’ access managed</span></div>
+        <div><b data-n="60">0</b><span>Accounts monitored</span></div>
       </div>
     </div>
   </header>
@@ -685,11 +685,9 @@
         <img src="cv/Profile.jpg" alt="Mauricio López">
       </div>
       <br><h2>About</h2>
-      <p style="margin-left:auto;margin-right:auto">I started in workforce management analytics, forecasting demand for customer service accounts and reporting on
-        KPIs. Over time my work moved toward one question: can this data be trusted? Today I automate reporting
-        pipelines and test them, so teams get accurate numbers without manual work.</p>
-      <p style="margin-left:auto;margin-right:auto">I lead through onboarding, mentoring, technical planning and cross-functional delivery. English proficient,
-        Spanish native. Based in Pereira, Colombia.</p>
+      <p style="margin-left:auto;margin-right:auto">I started in Workforce Management Analytics, working with forecasting, operational KPIs, and reporting. Over time, my focus shifted toward data quality and automation. Today, I use Python, Playwright, SQL, and Power BI to automate reporting processes, validate data, and build more reliable solutions.</p>
+      <p style="margin-left:auto;margin-right:auto">I also collaborate with cross-functional teams on technical planning, onboarding, and process improvements.</p>
+      <p style="margin-left:auto;margin-right:auto">Based in Pereira, Colombia | English proficient | Spanish native.</p>
       <div class="chips" id="stack" style="justify-content:center"></div>
     </div>
   </section>
@@ -725,7 +723,6 @@
       <h2>Python and data projects</h2>
       <p class="mute">Open source work on GitHub.</p>
       <!-- Edit the PROJECTS array to list your repos. -->
-      <div class="chips" id="pf"></div>
       <div class="cards" id="pcards"></div>
       <p style="margin-top:20px"><a class="btn" href="https://github.com/" target="_blank" rel="noopener">See all
           repositories on GitHub</a></p>
@@ -777,12 +774,12 @@
     /* ===== EDIT YOUR CONTENT HERE ===== */
     const DASHBOARDS = [
       { title: "USD / COP Intelligence", problem: "Limited visibility into currency fluctuations and global financial market trends.", solution: "Use historical data and performance indicators to identify market movements and potential risks.", tools: ["Power BI", "DAX", "Power Query"], result: "Provides a centralized view of key financial indicators.", embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiNzRjNmIyZmUtZGI2NC00YTYwLWI5OTEtZWZhNzJjYTE4NTgxIiwidCI6IjM2ZTRjMjk2LWJmNjgtNGQxNS05YjQ5LWY1ZTgyNGFlOWRiNiIsImMiOjZ9", publicLink: "https://app.powerbi.com/view?r=eyJrIjoiNzRjNmIyZmUtZGI2NC00YTYwLWI5OTEtZWZhNzJjYTE4NTgxIiwidCI6IjM2ZTRjMjk2LWJmNjgtNGQxNS05YjQ5LWY1ZTgyNGFlOWRiNiIsImMiOjZ9" },
-      { title: "Contact center forecast vs actual", problem: "Forecast error was hard to trace to root causes.", solution: "Variance views by interval, queue and day.", tools: ["Power BI", "Power Pivot", "Excel"], result: "Faster variance reviews and clearer staffing decisions.", embedUrl: "", publicLink: "" },
-      { title: "Report delivery tracker", problem: "Teams could not see which client reports had shipped.", solution: "Status board fed from an email server via Power Query.", tools: ["Power Query", "Power BI"], result: "Shared visibility across teams.", embedUrl: "", publicLink: "" }];
+      { title: "Contact center forecast vs actual", problem: "Forecast error was hard to trace to root causes.", solution: "Under construction.", tools: ["Power BI", "Power Pivot", "Excel"], result: "Faster variance reviews and clearer staffing decisions.", embedUrl: "", publicLink: "", interactive: false },
+      { title: "Report delivery tracker", problem: "Teams could not see which client reports had shipped.", solution: "Under construction.", tools: ["Power Query", "Power BI"], result: "Shared visibility across teams.", embedUrl: "", publicLink: "", interactive: false }];
     const PROJECTS = [
-      { name: "report-automation", desc: "Python pipeline that extracts, validates and delivers scheduled reports.", stack: ["Python", "Pandas"], cat: ["ETL", "Automation"], url: "https://github.com/", finding: "Replaces a manual weekly process." },
-      { name: "data-quality-checks", desc: "Reusable checks for outliers and formatting errors with Pandas and NumPy.", stack: ["Pandas", "NumPy"], cat: ["QA", "Pandas"], url: "https://github.com/", finding: "Flags anomalies before stakeholders see them." },
-      { name: "playwright-smoke-tests", desc: "Exploratory smoke tests for critical production flows.", stack: ["Python", "Playwright"], cat: ["QA", "Automation"], url: "https://github.com/", finding: "Catches broken dashboards early." }];
+      { name: "report-automation", desc: "Python pipeline that extracts, validates and delivers scheduled reports.", stack: ["Python", "Pandas"], cat: ["ETL", "Automation"], url: "https://github.com/", finding: "Replaces a manual weekly process.", interactive: false },
+      { name: "data-quality-checks", desc: "Reusable checks for outliers and formatting errors with Pandas and NumPy.", stack: ["Pandas", "NumPy"], cat: ["QA", "Pandas"], url: "https://github.com/", finding: "Flags anomalies before stakeholders see them.", interactive: false },
+      { name: "playwright-smoke-tests", desc: "Exploratory smoke tests for critical production flows.", stack: ["Python", "Playwright"], cat: ["QA", "Automation"], url: "https://github.com/", finding: "Catches broken dashboards early.", interactive: false }];
     const JOBS = [
       {
         id: "acc", co: "Accedo Technologies", role: "WFM, Real Time Analyst", when: "Aug 2020 – Apr 2022", tools: ["Power Query", "Power Pivot", "Excel"], b: [
@@ -824,7 +821,7 @@
     /* ===== APP ===== */
     const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
     const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-    let lens = "all", filt = "All", openJob = null;
+    let lens = "all", openJob = null;
     const sv = (k, v) => { try { localStorage.setItem(k, v) } catch (e) { } }, ld = k => { try { return localStorage.getItem(k) } catch (e) { return null } };
     function setLens(l, save = true) {
       lens = l; document.body.dataset.lens = l;
@@ -880,8 +877,13 @@
     function closeDrawer() { $('#drawer').classList.remove('open'); openJob = null }
     $('#drawer').onclick = e => { if (e.target.id === 'drawer') closeDrawer() };
     /* dashboards */
-    $('#dcards').innerHTML = DASHBOARDS.map((d, i) => `<button class="card" data-i="${i}"><h3>${d.title}</h3><dl><dt>Problem</dt><dd>${d.problem}</dd><dt>Solution</dt><dd>${d.solution}</dd><dt>Impact</dt><dd>${d.result}</dd></dl><div class="chips" style="margin:0">${d.tools.map(t => `<span class="chip">${t}</span>`).join('')}</div></button>`).join('');
-    $$('#dcards .card').forEach(c => c.onclick = () => openDash(DASHBOARDS[c.dataset.i]));
+    $('#dcards').innerHTML = DASHBOARDS.map((d, i) => {
+      const card = `<h3>${d.title}</h3><dl><dt>Problem</dt><dd>${d.problem}</dd><dt>Solution</dt><dd>${d.solution}</dd><dt>Impact</dt><dd>${d.result}</dd></dl><div class="chips" style="margin:0">${d.tools.map(t => `<span class="chip">${t}</span>`).join('')}</div>`;
+      return d.interactive === false
+        ? `<article class="card">${card}</article>`
+        : `<button class="card" data-i="${i}">${card}</button>`;
+    }).join('');
+    $$('#dcards .card[data-i]').forEach(c => c.onclick = () => openDash(DASHBOARDS[c.dataset.i]));
     function openDash(d) {
       $('#mt').textContent = d.title; const mo = $('#mo'); mo.style.display = d.publicLink ? '' : 'none'; mo.href = d.publicLink || '#';
       const mb = $('#mb');
@@ -897,11 +899,13 @@
     $('#fs').onclick = () => { const f = $('#mb iframe'); (f || $('#mb')).requestFullscreen?.() };
     document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeM(); closeDrawer() } });
     /* projects */
-    const cats = ["All", ...new Set(PROJECTS.flatMap(p => p.cat))];
     function renderP() {
-      $('#pf').innerHTML = cats.map(c => `<button class="chip ${c === filt ? 'on' : ''}" data-c="${c}">${c}</button>`).join('');
-      $$('#pf button').forEach(b => b.onclick = () => { filt = b.dataset.c; renderP() });
-      $('#pcards').innerHTML = PROJECTS.filter(p => filt === 'All' || p.cat.includes(filt)).map(p => `<a class="card" href="${p.url}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><h3>${p.name}</h3><p>${p.desc}</p><p class="mute" style="font-size:.88rem">Finding: ${p.finding}</p><div class="chips" style="margin:0">${p.stack.map(t => `<span class="chip">${t}</span>`).join('')}</div></a>`).join('')
+      $('#pcards').innerHTML = PROJECTS.map(p => {
+        const card = `<h3>${p.name}</h3><p>${p.desc}</p><p class="mute" style="font-size:.88rem">Finding: ${p.finding}</p><div class="chips" style="margin:0">${p.stack.map(t => `<span class="chip">${t}</span>`).join('')}</div>`;
+        return p.interactive === false
+          ? `<article class="card">${card}</article>`
+          : `<a class="card" href="${p.url}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">${card}</a>`;
+      }).join('');
     }
     renderP();
     /* toolkit */
